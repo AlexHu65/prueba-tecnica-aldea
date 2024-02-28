@@ -1,0 +1,48 @@
+---
+version: "3.8"
+services:
+  server-aldea:
+    image: nginx:alpine
+    restart: unless-stopped
+    ports:
+      - 8001:81
+    networks:
+      - app-network-aldea
+    volumes:
+      - ./:/var/www
+      - ./docker/nginx/conf.d/:/etc/nginx/conf.d/
+  db-aldea:
+    image: mysql
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      MYSQL_DATABASE: $DB_DATABASE
+      MYSQL_ROOT_PASSWORD: $DB_PASSWORD
+    networks:
+      - app-network-aldea
+    volumes:
+      - dbdata:/var/lib/mysql
+    ports:
+    - "3306:3306"
+  app-aldea:
+    build: .
+    restart: unless-stopped
+    networks:
+      - app-network-aldea
+    volumes:
+      - ./:/var/www
+  node-aldea:
+    image: node:20.4.0
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+      - /var/www/node_modules
+    command: sh /var/www/docker/node/node_start.sh
+    depends_on:
+      - app-aldea
+networks:
+  app-network-aldea:
+    driver: bridge
+volumes:
+  dbdata: null
