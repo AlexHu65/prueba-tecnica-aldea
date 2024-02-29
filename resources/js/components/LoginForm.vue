@@ -12,8 +12,10 @@
                             <div class="d-flex justify-content-center w-100">
                                 <img src="https://getaldea.com/images/aldea-navbar-logo.svg"/>
                             </div>
+                            
                         </template>
                         <div class="d-flex flex-column">
+                            <h3>Iniciar sesión</h3>
                             <form class="m-3" @submit.prevent="submit">
                                 <div class="row pt-2 pb-2">
                                     <label class="p-0 m-0 text-muted" for="username">Email</label>

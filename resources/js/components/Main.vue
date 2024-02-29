@@ -7,12 +7,18 @@
                     <a class="nav-link" href="#">Home <span class="sr-only">(current)</span><i class="pi pi-home"></i></a>
                 </li>
                 <li class="nav-item p-3">
-                    <a class="nav-link" href="#">Salir <i class="pi pi-lock"></i></a>
+                    <a href="#" @click="logout()" class="nav-link">Salir <i class="pi pi-lock"></i></a>
                 </li>
             </ul>
         </nav>
-        <LoginForm v-if="!token"/>
-        <App v-if="token"/>
+        <div v-if="loading" class="d-flex flex-column align-items-center justify-content-center pt-4 pb-4">
+            <i  class="pi pi-spin pi-spinner" style="font-size: 5rem; color: green"></i>
+            <span class="s20 m-4 font-weight-bold">
+            Redireccionando ...
+            </span>
+        </div>
+        <LoginForm v-if="!token && !loading"/>
+        <App v-if="token && !loading"/>
     </section>
 </template>
 
@@ -25,7 +31,8 @@ import { getToken, removeToken } from '../services/mainService';
 export default {
     data() {
         return {
-            token: null
+            token: null,
+            loading: false
         };
     },
     components: {
@@ -37,7 +44,16 @@ export default {
     },
     methods: {
         logout(){
+            
+            this.loading = true;
 
+            this.token = null;
+
+            removeToken();
+
+            setTimeout(() => {
+                this.loading = false;
+            }, 2500)
         }
     }
 }

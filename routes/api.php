@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\ExcelImportController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -19,7 +20,7 @@ use App\Http\Controllers\Api\CategoryController;
 Route::middleware('auth:api')->group( function () {
 
     Route::resource('/categories', CategoryController::class);
-
+    Route::post('/excel/import' , [ExcelImportController::class, 'import']);
 
 });
 
