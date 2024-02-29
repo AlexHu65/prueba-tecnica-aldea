@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\CategoryController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -15,7 +16,12 @@ use App\Http\Controllers\Api\AuthController;
 |
 */
 
+Route::middleware('auth:api')->group( function () {
 
+    Route::resource('/categories', CategoryController::class);
+
+
+});
 
 //no api auth
 Route::controller(AuthController::class)->group(function () {

@@ -1,16 +1,14 @@
 import axios from "axios";
-import  { config, env } from "../config/main";
+import { config, env } from "../config/main";
+import { getToken } from "../services/mainService";
 
 const setUrl = () => (env.prod ? config.prodApiUrl : config.devApiUrl);
 
 export const client = axios.create({
-    baseURL: setUrl(),
-    headers: {
-    'Content-Type': 'multipart/form-data'
-    }
-});
-/*
-headers: {
+  baseURL: setUrl(),
+  headers: {
     'Content-Type': 'multipart/form-data',
-    'Authorization': `Bearer ${getToken}`
-  }*/
+    'Accept' : 'application/json',
+    'Authorization': `Bearer ${getToken()}`
+  }
+});

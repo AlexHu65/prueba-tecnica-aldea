@@ -25,6 +25,12 @@
                                     <InputText id="pass" type="password" v-model="password"/>
                                     <small class="text-danger" v-if="errors && errors['password']" id="username-help">* {{  displayError('password') }}.</small>
                                 </div>
+
+                                <div class="row pt-2 pb-2">
+                                    <label class="p-0 m-0 text-muted" for="pass">Password</label>
+                                    <small class="text-danger" v-if="errors && errors['password']" id="username-help">* {{  displayError('password') }}.</small>
+                                </div>
+
                                 <div class="row pt-2 pb-2">
                                     <Button v-if="!loading" type="submit" label="Login" />
                                     <small class="text-danger mt-2" v-if="!success && error" id="username-help">* {{  error }}</small>
