@@ -15,28 +15,28 @@ class CategorySeeder extends Seeder
     {
         $categories = [
             [
-                'name' => 'Personal',
-                'key' => 'personal',
+                'name' => 'Servicios',
+                'key' => 'servicios',
             ],
             [
-                'name' => 'Empresa',
-                'key' => 'empresa',
+                'name' => 'Entretenimiento',
+                'key' => 'entretenimiento',
             ],
             [
-                'name' => 'Gasto fijo',
-                'key' => 'fijo',
+                'name' => 'Alimentación',
+                'key' => 'alimentacion',
             ],
             [
-                'name' => 'Viaticos',
-                'key' => 'viaticos',
+                'name' => 'Ropa',
+                'key' => 'ropa',
             ],
             [
-                'name' => 'Dieta',
-                'key' => 'dieta',
+                'name' => 'Cuidado Personal',
+                'key' => 'cuidado.personal',
             ],
             [
-                'name' => 'Restaurante',
-                'key' => 'restaurante',
+                'name' => 'Regalos',
+                'key' => 'regalos',
             ]
         ];
 
