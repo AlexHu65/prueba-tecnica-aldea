@@ -8,6 +8,8 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use App\Models\Bill;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -61,5 +63,13 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    /**
+     * Get the bills for the user.
+     */
+    public function bills(): BelongsToMany
+    {
+        return $this->belongsToMany(Bill::class);
     }
 }

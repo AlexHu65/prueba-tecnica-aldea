@@ -21,15 +21,18 @@ class ImportJob implements ShouldQueue
 
     protected $id;
 
+    protected $user;
+
     public $tries = 2;
 
     /**
      * Create a new job instance.
      */
-    public function __construct($path, $id)
+    public function __construct($path, $id, $user)
     {   
         $this->path = $path;
         $this->id = $id;
+        $this->user = $user;
     }
 
     /**
@@ -38,7 +41,7 @@ class ImportJob implements ShouldQueue
     public function handle(): void
     {
         try {
-            if(Excel::import(new BillImport, storage_path('/app/public/' . $this->path))){
+            if(Excel::import(new BillImport($this->user), storage_path('/app/public/' . $this->path))){
                 
                 $path = Path::find($this->id);
                 
