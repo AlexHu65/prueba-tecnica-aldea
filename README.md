@@ -40,13 +40,7 @@ Is your decision to use the above values, these are only examples. But ensure th
 **Email:** If in your app is needed send emails, these is the required configuration:
 
 ```sh
-MAIL_MAILER=smtp
-MAIL_HOST=smtp.gmail.com
-MAIL_PORT=465
-MAIL_USERNAME=a82294226@gmail.com 
-MAIL_PASSWORD=rckoueqowsmvnypa
-MAIL_ENCRYPTION=tls
-MAIL_FROM_NAME="${APP_NAME}"
+
 ```  
 
 ## Installation
