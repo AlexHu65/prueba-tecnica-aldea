@@ -116,11 +116,17 @@ docker-compose exec app-aldea php artisan db:seed
 docker-compose exec node-aldea npm run watch
 ```  
 
-4. Config on .env queue worker
+4. Run npm watch to generate laravel mix assets:  
+
+```sh
+docker-compose exec node-aldea npm run watch
+```  
+
+5. Config on .env queue worker
 
 QUEUE_CONNECTION="database"
 
-5. Config on .env email smtp
+6. Config on .env email smtp
 
 ```sh
 MAIL_MAILER=smtp
@@ -131,14 +137,20 @@ MAIL_PASSWORD=ckakwhbnmmkyvaar
 MAIL_ENCRYPTION=tls
 MAIL_FROM_NAME="${APP_NAME}"
 ```  
-6. Run queues
+7. Config jwt token
+
+```sh
+docker-compose exec app-aldea php artisan jwt:secret
+```  
+
+8. Run queues
 
 ```sh
 docker-compose exec app-aldea php artisan queue:work
 ```  
 
 
-7. Run on 
+9. Run on 
 http://localhost:8001/
 
 # Local environments

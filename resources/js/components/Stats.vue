@@ -1,7 +1,7 @@
 <template>
     <NavBar @loading-evnt="((e) => setLoad(e))"/>
     <div class="row justify-content-center p-0 m-0">
-        <div v-if="token" class="col-12">
+        <div v-if="token && !loading" class="col-12">
             <h1>Conteo por categoría:</h1>
             <div v-if="data && !loading">
                 <ul>
@@ -53,7 +53,7 @@ export default {
         setLoad(e){
             this.loading = e;
             setTimeout(() => {
-                window.href = '/';
+                window.location.href = '/';
             }, 1200);
         },
     }
