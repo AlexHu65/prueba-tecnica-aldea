@@ -104,10 +104,10 @@ docker-compose exec app-aldea php artisan migrate
 docker-compose exec app-aldea php artisan db:seed
 ```  
 
-3. Run npm watch to generate laravel mix assets:  
+3. Install node dependencies:  
 
 ```sh
-docker-compose exec node-aldea npm run watch
+docker-compose exec node-aldea npm i
 ```  
 
 4. Run npm watch to generate laravel mix assets:  
@@ -191,17 +191,23 @@ MAIL_ENCRYPTION=tls
 MAIL_FROM_NAME="${APP_NAME}"
 ```  
 
-7. Using npm to generate laravel mix assets
+7. Install node dependencies:  
+
+```sh
+docker-compose exec node-aldea npm i
+```  
+
+8. Using npm to generate laravel mix assets
 ```sh
 npm run watch
 ```  
 
-8. Run queues
+9. Run queues
 
 ```sh
 php artisan queue:work
 ```  
 
-9. Run on 
+10. Run on 
 http://localhost:8000/
 
