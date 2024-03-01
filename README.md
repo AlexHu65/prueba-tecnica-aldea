@@ -177,7 +177,9 @@ php artisan serve
 
 5. Config on .env queue worker
 
+```sh
 QUEUE_CONNECTION="database"
+```
 
 6. Config on .env email smtp
 
