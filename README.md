@@ -34,13 +34,7 @@ DB_USERNAME=root
 DB_PASSWORD=s1st3m2s
 ```  
 
-Is your decision to use the above values, these are only examples. But ensure that you are setting this because these values are importants to access to your database once the installations is finished.  
-
-**Email:** If in your app is needed send emails, these is the required configuration:
-
-```sh
-
-```  
+Is your decision to use the above values, these are only examples. But ensure you that are config this because these values are importants to access to your database once the installations is finished.  
 
 ## Installation
 
