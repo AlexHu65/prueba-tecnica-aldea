@@ -11,6 +11,9 @@ use Illuminate\Queue\SerializesModels;
 use App\Imports\BillImport;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Path;
+//mail dependencies
+use App\Mail\SendNotificationMail;
+use Illuminate\Support\Facades\Mail;
 
 
 class ImportJob implements ShouldQueue
@@ -46,9 +49,15 @@ class ImportJob implements ShouldQueue
                 $path = Path::find($this->id);
                 
                 if($path){
+
                     $path->imported = true;
+
                     $path->save();
-                    unlink(storage_path('/app/public/'. $path->path));
+
+                    if(Mail::to($this->user->email)->send(new SendNotificationMail($this->path))){
+                        unlink(storage_path('/app/public/'. $path->path));
+                    }
+
                 }
             }
         } catch (\Exception $e) {

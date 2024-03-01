@@ -38,19 +38,29 @@ class BillController extends BaseController
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        //
+        try {
+            
+            $params = $request->all();
+
+            $date = Carbon::parse($params['date']);
+
+            $params['date'] = $date->toDateTimeString();
+
+            $bill = Bill::create($params);
+
+            $user = auth('api')->user();
+
+            $user->bills()->attach($bill);
+            
+            return $this->success('Cuenta creada correctamente', $bill);
+
+        } catch (\Exception $e) {
+            return $this->error('Exception', ["error" => $e->getMessage()], $e->getMessage(), 500);
+        }
     }
 
     /**
@@ -61,18 +71,10 @@ class BillController extends BaseController
         try {
 
             return $this->success('Categories retrieved successfully', new BillResource($bill));
-            
+
         } catch (\Exception $e) {
             return $this->error('Exception', ["error" => $e->getMessage()], $e->getMessage(), 500);
         }
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
     }
 
     /**
@@ -83,6 +85,10 @@ class BillController extends BaseController
         try {
             
             $params = $request->all();
+
+            $date = Carbon::parse($params['date']);
+
+            $params['date'] = $date->toDateTimeString();
 
             $bill->update($params);
             
@@ -96,8 +102,19 @@ class BillController extends BaseController
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Bill $bill)
     {
-        //
+        try {
+            
+            $bill->user()->detach();
+            
+            $bill->delete();
+            
+            return $this->success('Cuenta eliminada correctamente', $bill);
+
+        } catch (\Exception $e) {
+            return $this->error('Exception', ["error" => $e->getMessage()], $e->getMessage(), 500);
+        }
+        
     }
 }

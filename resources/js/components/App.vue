@@ -48,7 +48,10 @@
                                     <small class="text-danger" v-if="errors && errors['category_id']" id="category-help">* {{  displayError('category_id') }}.</small>
                                 </div>
                                 <div class="row pt-2 pb-2">
-                                    <Button v-if="!loading" type="submit" label="Guardar" />
+                                    <div class="d-flex justify-content-arround align-items-center">
+                                        <Button icon="pi pi-check" class="m-2" v-if="!loading" type="submit" label="Guardar" />
+                                        <Button icon="pi pi-trash" class="m-2" v-if="!loading && model.id !=0" @click="destroy()" severity="danger" label="Borrar" />
+                                    </div>
                                     <small class="text-danger mt-2" v-if="!success && error" id="username-help">* {{  error }}</small>
                                 </div>
                             </form>
@@ -103,6 +106,7 @@
             this.getBills();
         },
         methods: {
+            
             upload(e){
                 
                 const [xlsx] = Array.from(e.target.files);
@@ -148,8 +152,29 @@
                 .catch(console.warn);
             },
 
+            destroy(){
+                const { id } = this.model;
+                billService.delete(`bills/${id}`)
+                    .then((response) => {
+                        if(response.data.status){
+                            this.$swal.fire({
+                                title: `${response.data.msg}`,
+                                icon: 'success',
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.reload();
+                                }
+                            });
+                        }else{
+                            const { error } = response.data.data;
+                            this.error = error;
+                        }
+                        
+                    }).catch(console.warn);
+
+            },
             submit(){
-                if(this.selectedBill){
+                if(this.selectedBill.id){
 
                     billService.put(`bills/${this.selectedBill}`, this.model)
                     .then((response) => {
@@ -169,11 +194,35 @@
                             const { error } = response.data.data;
                             this.error = error;
                         }
-                        console.log('r', response);
-                    }).catch(console.warn)
+                        
+                    }).catch(console.warn);
                 
                 }else{
 
+                    const data = {
+                        'description' : this.model.description,
+                        'date': this.model.date,
+                        'category_id': this.model.category_id,
+                        'amount': this.model.amount
+                    };
+
+                    billService.post(`bills`, data)
+                    .then((response) => {
+                        if(response.data.status){
+                            this.$swal.fire({
+                                title: `${response.data.msg}`,
+                                icon: 'success',
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.reload();
+                                }
+                            });
+
+                        }else{
+                            const { error } = response.data.data;
+                            this.error = error;
+                        }
+                    }).catch(console.warn)
                 }
             },
             getBills(){

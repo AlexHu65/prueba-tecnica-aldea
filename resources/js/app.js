@@ -8,16 +8,24 @@ import PrimeVue from "primevue/config";
 import Tooltip from 'primevue/tooltip';
 
 import Main from './components/Main.vue';
+import Stats from  './components/Stats.vue';
 
 import { createApp } from "vue";
 
 
 const app = createApp(Main);
+const stts = createApp(Stats);
 
 app
     .use(PrimeVue, { ripple: true })
     .use(VueSweetalert2)
     .directive('tooltip', Tooltip);
 
+stts
+    .use(PrimeVue, { ripple: true })
+    .use(VueSweetalert2)
+    .directive('tooltip', Tooltip);
+
 app.mount(`#app`); 
+stts.mount(`#stats`); 
 

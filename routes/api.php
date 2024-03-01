@@ -23,6 +23,7 @@ Route::middleware('auth:api')->group( function () {
     Route::resource('/categories', CategoryController::class);
     Route::resource('/bills', BillController::class);
     Route::post('/excel/import' , [ExcelImportController::class, 'import']);
+    Route::get('/stats/bills' , [CategoryController::class, 'stats']);
 
 });
 

@@ -1,8 +1,6 @@
 
 # Prueba tecnica Aldea
 
-
-
 ## Tecnología
 
 El presente proyecto se encuentra desarrollado con el siguiente STACK:
@@ -10,12 +8,13 @@ El presente proyecto se encuentra desarrollado con el siguiente STACK:
 | Tech | README |
 | ------ | ------ |
 | PHP 8.2 | https://www.php.net/releases/8.2/en.php|
+| Composer | https://getcomposer.org|
+| Node.js 20.4.0 | https://nodejs.org|
 | Laravel 10.19.0 | https://laravel.com|
 | Optional Docker compose v2.19.1 | https://docs.docker.com/compose|
 | Optional: Docker desktop | https://www.docker.com/products/docker-desktop|
 | Optional: Docker desktop | https://www.docker.com/products/docker-desktop|
 | Optional Windows Installation: Docker wsl | https://docs.docker.com/desktop/wsl|
-| Node.js 20.4.0 | https://nodejs.org|
 
 
 ## Configurations and environment
@@ -97,30 +96,106 @@ Once you run the command describe above and in your terminal outputs are OK, you
 docker-compose ps
 ```  
 
+There are some impotant commands to prepare your environment:  
 
-If everithing is OK: Congratulations! you are now in Docker environment.  
-
-There are some impotant commands like:  
-
-1. Execute command line in an specific service of your container, example:  
-
-```sh
-docker-compose exec app-aldea sh
-```  
-
-2. Execute command directly on an specific service, example:  
+1. Run migrations 
 
 ```sh
 docker-compose exec app-aldea php artisan migrate
+```  
+
+2. Run seeders:  
+
+```sh
 docker-compose exec app-aldea php artisan db:seed
 ```  
 
-3. Kill all services from your container, exmample:  
+3. Run npm watch to generate laravel mix assets:  
 
 ```sh
-docker-compose kill
+docker-compose exec node-aldea npm run watch
 ```  
 
-Ensure that you have permissions to run sh scripts in your hosting.  
+4. Config on .env queue worker
 
-Your are free to update as you need this script.  
+QUEUE_CONNECTION="database"
+
+5. Config on .env email smtp
+
+```sh
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=465
+MAIL_USERNAME=a82294226@gmail.com 
+MAIL_PASSWORD=ckakwhbnmmkyvaar
+MAIL_ENCRYPTION=tls
+MAIL_FROM_NAME="${APP_NAME}"
+```  
+6. Run queues
+
+```sh
+docker-compose exec app-aldea php artisan queue:work
+```  
+
+
+7. Run on 
+http://localhost:8001/
+
+# Local environments
+
+Once you put this repository on local, please run these commands:
+
+1. Run migrations 
+
+```sh
+php artisan migrate
+```  
+
+2. Run seeders 
+
+```sh
+php artisan db:seed
+```  
+
+3. Config jwt token
+
+```sh
+php artisan jwt:secret
+```  
+
+4. Run server
+
+```sh
+php artisan serve
+```  
+
+5. Config on .env queue worker
+
+QUEUE_CONNECTION="database"
+
+6. Config on .env email smtp
+
+```sh
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=465
+MAIL_USERNAME=a82294226@gmail.com 
+MAIL_PASSWORD=ckakwhbnmmkyvaar
+MAIL_ENCRYPTION=tls
+MAIL_FROM_NAME="${APP_NAME}"
+```  
+
+7. Using npm to generate laravel mix assets
+```sh
+npm run watch
+```  
+
+8. Run queues
+
+```sh
+php artisan queue:work
+```  
+
+9. Run on 
+http://localhost:8000/
+

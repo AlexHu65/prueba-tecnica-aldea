@@ -16,6 +16,7 @@ use App\Models\Bill;
 
 //resources
 use App\Http\Resources\CategoryResource;
+use App\Http\Resources\CategoryStatsResource;
 
 
 class CategoryController extends BaseController
@@ -82,5 +83,22 @@ class CategoryController extends BaseController
     public function destroy(string $id)
     {
         //
+    }
+
+
+    /**
+     * Return stats
+     */
+    public function stats(){
+
+        try {
+
+            $categories = Category::withCount('bills')->get();
+
+            return $this->success('Categories retrieved successfully', CategoryResource::collection($categories));
+            
+        } catch (\Exception $e) {
+            return $this->error('Exception', ["error" => $e->getMessage()], $e->getMessage(), 500);
+        }
     }
 }
