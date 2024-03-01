@@ -206,8 +206,14 @@ npm run watch
 
 ```sh
 php artisan queue:work
+```
+
+10. Run server
+
+```sh
+php artisan serve
 ```  
 
-10. Run on 
+11. Run on 
 http://localhost:8000/
 
