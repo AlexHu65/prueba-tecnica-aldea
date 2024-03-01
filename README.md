@@ -118,7 +118,9 @@ docker-compose exec node-aldea npm run watch
 
 5. Config on .env queue worker
 
+```sh
 QUEUE_CONNECTION="database"
+```  
 
 6. Config on .env email smtp
 
