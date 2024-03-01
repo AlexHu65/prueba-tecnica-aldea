@@ -93,7 +93,7 @@ class CategoryController extends BaseController
 
         try {
 
-            $categories = Category::withCount('bills')->get();
+            $categories = Category::get();
 
             return $this->success('Categories retrieved successfully', CategoryResource::collection($categories));
             

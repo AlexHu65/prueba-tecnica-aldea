@@ -20276,7 +20276,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     },
     submit: function submit() {
       var _this4 = this;
-      if (this.selectedBill.id) {
+      if (this.selectedBill.id !== 0) {
         _services_billService__WEBPACK_IMPORTED_MODULE_8__["default"].put("bills/".concat(this.selectedBill), this.model).then(function (response) {
           if (response.data.status) {
             console.log('r', response);

@@ -174,7 +174,8 @@
 
             },
             submit(){
-                if(this.selectedBill.id){
+                if(this.selectedBill.id !== 0){
+
 
                     billService.put(`bills/${this.selectedBill}`, this.model)
                     .then((response) => {
