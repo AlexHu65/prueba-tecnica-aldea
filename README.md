@@ -194,7 +194,7 @@ MAIL_FROM_NAME="${APP_NAME}"
 7. Install node dependencies:  
 
 ```sh
-docker-compose exec node-aldea npm i
+npm i
 ```  
 
 8. Using npm to generate laravel mix assets
